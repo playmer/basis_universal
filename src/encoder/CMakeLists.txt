@@ -46,9 +46,11 @@ target_include_directories(basisu_encoder
 target_link_libraries(basisu_encoder 
 		PUBLIC
 		basisu_transcoder
-		PRIVATE
-		Threads::Threads
 		)
+
+if(OpenMP_CXX_FOUND)
+	target_link_libraries(basisu_encoder PUBLIC OpenMP::OpenMP_CXX)
+endif()
 
 if(BASISU_INSTALL)
 	install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/"

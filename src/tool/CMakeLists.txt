@@ -19,7 +19,13 @@ set_target_properties(basisu_tool PROPERTIES
 		FOLDER "basisu"
 		)
 
-target_link_libraries(basisu_tool PRIVATE basisu_encoder)
+target_link_libraries(basisu_tool 
+		PRIVATE 
+		basisu_encoder)
+		
+if(OpenMP_CXX_FOUND)
+	target_link_libraries(basisu_tool PUBLIC OpenMP::OpenMP_CXX)
+endif()
 
 if(BASISU_INSTALL_TOOL)
 	install(TARGETS basisu_tool
