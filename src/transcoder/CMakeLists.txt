@@ -22,11 +22,6 @@ target_include_directories(basisu_transcoder
 		$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/transcoder>
 		)
 
-target_link_libraries(basisu_transcoder 
-		PRIVATE
-		Threads::Threads
-		)
-
 if(BASISU_INSTALL)
 	install(DIRECTORY "${CMAKE_CURRENT_LIST_DIR}/"
 			DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}/transcoder"
