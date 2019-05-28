@@ -20,13 +20,13 @@
 #pragma warning (disable : 4127) // warning C4127: conditional expression is constant
 #pragma warning (disable : 4530) // C++ exception handler used, but unwind semantics are not enabled.
 //#define _HAS_ITERATOR_DEBUGGING 0
-#if defined(_DEBUG) || defined(DEBUG)
-#define _ITERATOR_DEBUG_LEVEL 1
-#define _SECURE_SCL 1
-#else
-#define _SECURE_SCL 0
-#define _ITERATOR_DEBUG_LEVEL 0
-#endif
+//#if defined(_DEBUG) || defined(DEBUG)
+//#define _ITERATOR_DEBUG_LEVEL 1
+//#define _SECURE_SCL 1
+//#else
+//#define _SECURE_SCL 0
+//#define _ITERATOR_DEBUG_LEVEL 0
+//#endif
 #ifndef NOMINMAX
 	#define NOMINMAX
 #endif
@@ -64,7 +64,7 @@
 
 // Set to one to enable debug printf()'s when any errors occur, for development/debugging.
 #ifndef BASISU_DEVEL_MESSAGES
-#define BASISU_DEVEL_MESSAGES 0
+#define BASISU_DEVEL_MESSAGES 1
 #endif
 
 #define BASISU_NOTE_UNUSED(x) (void)(x)
