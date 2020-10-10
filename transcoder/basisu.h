@@ -41,11 +41,11 @@
 			#endif
 		#endif // defined(_DEBUG) || defined(DEBUG)
 
-		#ifndef NOMINMAX
-			#define NOMINMAX
-		#endif
-
 	#endif // BASISU_NO_ITERATOR_DEBUG_LEVEL
+
+	#ifndef NOMINMAX
+		#define NOMINMAX
+	#endif
 
 #endif // _MSC_VER
 

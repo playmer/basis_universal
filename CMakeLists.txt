@@ -3,6 +3,7 @@ project(basisu)
 cmake_minimum_required(VERSION 3.0)
 option(BUILD_X64 "build 64-bit" TRUE)
 option(STATIC "static linking" FALSE)
+option(BASISU_NO_ITERATOR_DEBUG_LEVEL "Tells us if basisu should set the iterator debug level itself. Leave false for basisu to set it." FALSE)
 
 message("Initial BUILD_X64=${BUILD_X64}")
 message("Initial CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}")
@@ -66,7 +67,6 @@ set(BASISU_SRC_LIST ${COMMON_SRC_LIST}
 	basisu_resampler.cpp
 	basisu_resample_filters.cpp
 	basisu_ssim.cpp
-	basisu_tool.cpp
 	basisu_astc_decomp.cpp
 	basisu_uastc_enc.cpp
 	basisu_bc7enc.cpp
@@ -75,6 +75,19 @@ set(BASISU_SRC_LIST ${COMMON_SRC_LIST}
 	jpgd.cpp
 	transcoder/basisu_transcoder.cpp
 	)
+
+add_library(basisu_encoder ${BASISU_SRC_LIST})
+add_library(basisu_transcoder transcoder/basisu_transcoder.cpp)
+target_include_directories(basisu_transcoder PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+
+if (BASISU_NO_ITERATOR_DEBUG_LEVEL)
+	target_compile_definitions(basisu_encoder PUBLIC BASISU_NO_ITERATOR_DEBUG_LEVEL)
+	target_compile_definitions(basisu_transcoder PUBLIC BASISU_NO_ITERATOR_DEBUG_LEVEL)
+endif()
+
+if (NOT MSVC)
+	target_link_libraries(basisu_encoder m pthread)
+endif()
 
 if (APPLE)
    set(BIN_DIRECTORY "bin_osx")
